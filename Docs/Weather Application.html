@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather Application</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            padding: 20px;
+            max-width: 800px;
+            margin: auto;
+        }
+        h1 {
+            text-align: center;
+        }
+        #app {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #007BFF;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        #feed {
+            margin-top: 20px;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        li {
+            padding: 5px 0;
+        }
+        .copyright {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            background-color: #fff;
+            text-align: center;
+            padding: 10px;
+            border-top: 1px solid #ccc;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+
+<div id="app">
+    <h1>Weather Application</h1>
+    <input type="text" id="city" placeholder="Enter City Name (e.g., London)">
+    <button id="showWeather">Show Weather</button>
+    <div id="feed"></div>
+</div>
+
+<div class="copyright">
+    © 2024 Rajdeep Chatterjee. All rights reserved.
+</div>
+
+<script>
+document.getElementById('showWeather').addEventListener('click', function() {
+    const city = document.getElementById('city').value.trim();
+    const feed = document.getElementById('feed');
+
+    if (city) {
+        fetchWeatherDetails(feed, city);
+    } else {
+        feed.innerHTML = '<p>Please enter a city name.</p>';
+    }
+});
+
+function fetchWeatherDetails(feed, city) {
+    const apiKey = 'd6f41551fc5ac98e00234899a7e78526';
+    const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
+
+    fetch(apiUrl)
+        .then(response => {
+            if (!response.ok) {
+                // Log the response for debugging
+                console.log('Response:', response);
+                throw new Error('City not found.');
+            }
+            return response.json();
+        })
+        .then(data => {
+            const weatherDetails = `
+                <ul>
+                    <li><strong>City:</strong> ${data.name}</li>
+                    <li><strong>Temperature:</strong> ${data.main.temp} °C</li>
+                    <li><strong>Weather:</strong> ${data.weather[0].description}</li>
+                    <li><strong>Humidity:</strong> ${data.main.humidity}%</li>
+                    <li><strong>Wind Speed:</strong> ${data.wind.speed} m/s</li>
+                    <li><strong>Pressure:</strong> ${data.main.pressure} hPa</li>
+                    <li><strong>Visibility:</strong> ${data.visibility / 1000} km</li>
+                </ul>
+            `;
+            feed.innerHTML = weatherDetails;
+        })
+        .catch(error => {
+            feed.innerHTML = `<p>Error: ${error.message}</p>`;
+        });
+}
+</script>
+
+
+</body></html>
