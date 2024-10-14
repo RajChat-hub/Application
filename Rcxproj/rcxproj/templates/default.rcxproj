@@ -1,0 +1,20 @@
+<RcxProject>
+  <Configurations>
+    <Configuration Name="Debug" Platform="x64" />
+  </Configurations>
+  
+  <PropertyGroup>
+    <OutputDirectory>./bin/</OutputDirectory>
+    <TargetType>Application</TargetType>
+  </PropertyGroup>
+  
+  <ItemGroup>
+    <SourceFiles>
+      <File Include="src/main.cpp" />
+      <File Include="src/utils.cpp" />
+    </SourceFiles>
+    <HeaderFiles>
+      <File Include="src/utils.h" />
+    </HeaderFiles>
+  </ItemGroup>
+</RcxProject>

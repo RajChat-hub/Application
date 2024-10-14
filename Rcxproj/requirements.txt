@@ -1,0 +1,2 @@
+lxml==5.3.0  # For parsing XML-based rcxproj files (if used)
+argparse==1.4.0  # For command-line interface parsing (optional if you want advanced CLI)

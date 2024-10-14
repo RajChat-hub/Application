@@ -1,0 +1,9 @@
+Metadata-Version: 2.1
+Name: rcxproj
+Version: 2.0
+Summary: A build system for C++ projects similar to VCXProj
+Home-page: https://github.com/RajChat-hub
+Author: Rajdeep Chatterjee
+Author-email: rc9775295@gmail.com
+License-File: LICENCE.txt
+Requires-Dist: lxml

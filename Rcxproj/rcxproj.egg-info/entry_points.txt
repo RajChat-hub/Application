@@ -1,0 +1,2 @@
+[console_scripts]
+rcx = rcxproj.cli:main
